@@ -15,5 +15,8 @@ setup(
     author_email='lota.ezenwa@gmail.com',
     url='https://github.com/LotannaEzenwa/knowlify',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    test_suite='nose.collector',
+    tests_require=['nose'],
+    scripts=['bin/knowl_setup.sh']
 )
