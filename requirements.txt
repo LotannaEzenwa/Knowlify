@@ -5,3 +5,4 @@
 nltk
 nose
 sphinx
+versioneer
