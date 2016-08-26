@@ -66,4 +66,9 @@ setup(
     install_requires=read_requirements('requirements.txt'),
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
+    entry_points={
+        'console_scripts': [
+            'knowlify = knowlify.__main__:main',
+        ],
+    },
 )
