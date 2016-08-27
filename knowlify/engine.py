@@ -1,10 +1,13 @@
 # This one decides what to do
 from abc import ABCMeta, abstractproperty
-import os, sys
+
+import knowlify
+import microserver
 
 
 
-class Engine(metaclass=ABCMeta):
+class Engine(object):
+    __metaclass__ = ABCMeta
 
     @abstractproperty
     def __init__(self):
@@ -61,3 +64,36 @@ class ContextingEngine(Engine):
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
+
+
+class LocalServerEngine(Engine):
+    """
+    Because Javascript is holding the world hostage
+    """
+
+    def __init__(self, port, data_dir):
+        self._port = port
+        self._data_dir = data_dir
+
+    def __enter__(self):
+        self._server, self._handler =\
+            microserver.start_server(self._port, self._handler)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        microserver.close_server(self.server_instance)
+
+    @property
+    def server_instance(self):
+        return self._server
+
+    @property
+    def handler(self):
+        return self._handler
+
+    @property
+    def port(self):
+        return self._port
+
+    @property
+    def data_directory(self):
+        return self._data_dir
