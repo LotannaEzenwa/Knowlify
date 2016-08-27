@@ -16,7 +16,7 @@ def get_page(file_or_url):
     :return:
     """
     if not os.path.isfile(file_or_url):
-        return parser.build_page_from_url(file_or_url)
+        return parser.build_full_page_from_url(file_or_url)
 
     else:
         with open(file_or_url, 'r') as f:
