@@ -1,30 +1,18 @@
 import click
+import knowlify
 from lxml import html
 import requests
 import os
+import config
+import time
 
-DATA_DIR = './data/'
 
 @click.command()
-@click.argument('url', type=click.STRING, default='https://en.wikipedia.org/wiki/Mathematics')
-@click.argument('name', type=click.STRING, default='')
-def main(url, name):
-    print "Pointing to %s" % url
-    print "Downloading %s" % url
-    page = requests.get(url)
-    tree = html.fromstring(page.content)
-    print "Downloaded %s" % url
-    if name == '':
-        name = os.path.join(DATA_DIR,url.split('/')[-1])
-
-    if not os.path.isdir(DATA_DIR):
-        os.mkdir(DATA_DIR)
-
-    with open(name, 'w') as f:
-        f.write(page.content)
-
-    print "WE MADE IT :D"
-
+@click.argument('filename_or_url', type=click.STRING, default='https://en.wikipedia.org/wiki/Mathematics')
+@click.option('-p','path', type=click.STRING, default=None)
+def main(filename_or_url, path):
+    page = knowlify.get_page(filename_or_url)
+    return knowlify.output_page(page, path)
 
 
 if __name__ == '__main__':
