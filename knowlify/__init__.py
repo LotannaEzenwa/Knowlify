@@ -26,9 +26,6 @@ def get_page(file_or_url):
 
 
 def output_page(page, path=None):
-    if path is None:
-        path = page.base_url
-
     return worker.output_page(page, path)
 
 __all__ = [

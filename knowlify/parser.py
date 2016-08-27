@@ -31,13 +31,13 @@ def append_header(page):
     page.head.insert(1, html.Element(
         'script',
         type="text/javascript",
-        src='http://aimath.org/knowl.js',
+        src='knowl.js',
 
     ))
 
     page.head.insert(1, html.Element(
         'link',
-        href='http://aimath.org/knowlstyle.css',
+        href='knowlstyle.css',
         rel='stylesheet',
         type='text/css',
     ))
@@ -45,7 +45,7 @@ def append_header(page):
     page.head.insert(1, html.Element(
             'script',
             type='text/javascript',
-            src='http://code.jquery.com/jquery-latest.min.js'
+            src='jquery-latest.min.js'
     ))
 
     return page

@@ -9,3 +9,4 @@ sphinx
 versioneer
 requests
 lxml
+flake8

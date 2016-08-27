@@ -5,21 +5,27 @@ from codecs import open
 from lxml import html
 
 
-def output_page(page, name=None):
-    assert isinstance(page, html.HtmlElement)
-    if name is None:
-        # name = os.path.join(config.DATA_DIR, 'knowl_'+ page.text_content().lstrip('\r\n')[:11] + str(time.time()) + '.html')
-        name = os.path.join(config.DATA_DIR, 'knowl_' + page.text_content().lstrip('\r\n')[:11] + '.html')
+def output_page(page, path=None):
+    """
+    :type page: html.HtmlElement
+    :returns path: os.path.genericpath
+    """
 
-    # if os.path.isfile(name):
-    #     name += str(time.time())
+    if path is None:
+        # path = os.path.join(config.DATA_DIR, 'knowl_'+ page.text_content().lstrip('\r\n')[:11] + str(time.time()) + '.html')
+        path = os.path.join(config.DATA_DIR, 'knowl_' + page.text_content().lstrip('\r\n')[:11] + '.html')
+
+    # if os.path.isfile(path):
+    #     path += str(time.time())
 
     try:
-        with open(name, 'w') as f:
+        with open(path, 'w') as f:
             f.write(html.tostring(page))
     except OSError:
-        sys.stderr('Unable to write output for filename: %s' % name)
+        sys.stderr('Unable to write output for filename: %s' % path)
         return 2
+
+    return path
 
 
 def output_dummy(page, len=5):
