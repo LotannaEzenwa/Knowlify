@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from os.path import (
     abspath,
     dirname,
@@ -27,8 +27,6 @@ def _filter_requirements(lines_iter):
         line = line.strip()
         if not line or line.startswith('#'):
             continue
-
-
 
         yield line
 
@@ -59,7 +57,7 @@ setup(
     author_email='lota.ezenwa@gmail.com',
     url='https://github.com/LotannaEzenwa/knowlify',
     license='MIT',
-    packages=find_packages(exclude=('tests', 'docs')),
+    packages={'':'knowlify'},
     test_suite='nose.collector',
     tests_require=['nose'],
     install_requires=read_requirements('requirements.txt'),
