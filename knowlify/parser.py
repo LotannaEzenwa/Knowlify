@@ -55,14 +55,10 @@ def swap_href(page):
     #TODO: Create another function that intelligently selects knowlable words/phrases
     c = 0
     for element, attribute, link, pos in page.body.iterlinks():
-        c += 1
-        if c > 20:
-            break
         if attribute == 'href':
             dumb_url = element.classes._attributes['href']
             element.classes._attributes.pop('href')
-            dumb_page = build_dummy_page_from_url(dumb_url)
-            element.classes._attributes['knowl'] = worker.output_dummy(dumb_page)
+            element.classes._attributes['knowl'] = dumb_url
 
 
     return page
@@ -74,7 +70,6 @@ def build_full_page_from_url(url):
     :return: simply knowlified page
     """
     page = get_page_from_web(url)
-    page.make_links_absolute(url)
     page = swap_href(page)
     page = append_header(page)
     return page
